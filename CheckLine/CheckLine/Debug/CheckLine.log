@@ -1,0 +1,15 @@
+﻿生成启动时间为 2019/4/10 23:12:59。
+     1>项目“D:\Code\Practice-Cpp\CheckLine\CheckLine\CheckLine.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:prompt main.c
+         main.c
+     1>d:\code\practice-cpp\checkline\checkline\main.c(46): warning C4013: “IsSame”未定义；假设外部返回 int
+     1>d:\code\practice-cpp\checkline\checkline\main.c(98): warning C4013: “system”未定义；假设外部返回 int
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Code\Practice-Cpp\CheckLine\Debug\CheckLine.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Code\Practice-Cpp\CheckLine\Debug\CheckLine.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Code\Practice-Cpp\CheckLine\Debug\CheckLine.lib" /MACHINE:X86 Debug\main.obj
+         CheckLine.vcxproj -> D:\Code\Practice-Cpp\CheckLine\Debug\CheckLine.exe
+     1>已完成生成项目“D:\Code\Practice-Cpp\CheckLine\CheckLine\CheckLine.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:00.79
