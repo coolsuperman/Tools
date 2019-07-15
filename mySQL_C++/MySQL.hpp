@@ -1,6 +1,7 @@
 
 #include<mysql/mysql.h>
 #include<iostream>
+#include<unordered_map>
 #include<string>
 #include<vector>
 
@@ -8,6 +9,7 @@ class mySQL{
   public:
     mySQL();
     ~mySQL();
+    std::vector<std::unordered_map<std::string,std::string>> Data;
     bool InitSQL(std::string host,std::string user,std::string password,std::string dbname);
     bool exeSQL(std::string query);
     bool CreateTable(std::string table_name);
@@ -16,6 +18,7 @@ class mySQL{
     bool Delete_byName(const std::string& str,const std::string& table_name);
     bool Update_byName(const std::string& item,const std::string& upadte,const std::string& name,const std::string& table_name);
     bool Select(const std::string& table_name);
+    void OrgData();
   private:
     MYSQL* msql=NULL;
     MYSQL_RES* result;
@@ -24,6 +27,16 @@ class mySQL{
     std::vector<std::string> Name;//存放项的名称；
     std::vector<std::vector<std::string>> all;//存放每行的每项数据；
 };
+
+void mySQL::OrgData(){
+  for(size_t i = 0;i<all.size();i++){
+    std::unordered_map<std::string,std::string> in;
+    for(size_t j=0;j<all[i].size();j++){
+      in.insert({Name[j],all[i][j]});
+    }
+    Data.push_back(in);
+  }
+}
 
 mySQL::mySQL(){
   msql=mysql_init(NULL);
@@ -68,11 +81,12 @@ bool mySQL::exeSQL(std::string query){//sql操作模块；
       for(size_t j=0;j<num;j++){
         std::string every=row[j];
         in.push_back(every);
-        std::cout<<row[j]<<"   ";
+        std::cout<<every<<"   ";
       }
       all.push_back(in);
       std::cout<<std::endl;
     }
+    OrgData();
   }else{
     if(mysql_field_count(msql)==0){//最近的一条指令的列数
       aff_rows=mysql_affected_rows(msql);//返回update，insert，delete影响的行数；
@@ -91,10 +105,11 @@ bool mySQL::exeSQL(std::string query){//sql操作模块；
 bool mySQL::CreateTable(std::string table_name){
   std::string query="create table if not exists `"+table_name;
   query+="`(ID int primary key auto_increment comment '文件序号',";
-  query+="Name varchar(20) not null unique key comment '文件名',";
-  query+="Mime varchar(20) not null comment '文件类型',";
+  query+="Name varchar(200) not null unique key comment '文件名',";
+  query+="Mime varchar(200) not null comment '文件类型',";
   query+="Bytes int not null comment '文件大小',";
-  query+="add_time datetime not null comment '添加时间',";
+  query+="add_time varchar(200) not null comment '添加时间',";
+  query+="Path varchar(200) not null comment '文件路径',";
   query+="Last_Modify timestamp comment '修改时间'";
   query+=")engine innodb;";
   std::cout<<query<<std::endl;
@@ -109,7 +124,7 @@ bool mySQL::ReCreateTable(std::string table_name){
 
 bool mySQL::Insert(const std::string& src,const std::string& table_name){
   std::string query="insert into `"+table_name;
-  query+="` (Name,Mime,Bytes,add_time,Last_Modify) values ("+src+");";
+  query+="` (Name,Mime,Bytes,add_time,Path) values ("+src+");";
   std::cout<<query<<std::endl;
   return exeSQL(query);
 }
