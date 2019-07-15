@@ -2,18 +2,25 @@
 
 
 int main(){
-  mySQL test;
-  test.InitSQL("localhost","root","199805","HttpSever");
-  test.ReCreateTable("root");
-  test.CreateTable("root");
-  test.Insert("'hehe','.cc','10','2019-7-14','2019-7-14'","root");
-  test.Insert("'haha','.cc','10','2019-7-14','2019-7-14'","root");
-  test.Insert("'heng','.cc','10','2019-7-14','2019-7-14'","root");
-  test.Select("root");
-  test.Select("root");
-  test.Delete_byName("haha","root");
-  test.Select("root");
-  test.Update_byName("Mime",".txt","heng","root");
-  test.Select("root");
+  mySQL demo;
+  demo.InitSQL("localhost","root","199805","HttpSever");
+  demo.ReCreateTable("root");
+  demo.CreateTable("root");
+  demo.Insert("'hehe','.cc','10','2019-7-14','./Web'","root");
+  demo.Insert("'haha','.cc','10','2019-7-14','./Web'","root");
+  demo.Insert("'heng','.cc','10','2019-7-14','./Web'","root");
+  demo.Select("root");
+  for(size_t i =0; i<demo.Data.size();i++){//测试Org_Data函数；
+    for(auto e:demo.Data[i]){
+      std::cout<<e.first<<"-"<<e.second<<" ";
+    }
+    std::cout<<std::endl;
+  }
+  demo.Delete_byName("haha","root");
+  demo.Delete_byName("heng","root");
+  demo.Delete_byName("hehe","root");
+  demo.Select("root");
+  demo.Update_byName("Mime",".txt","heng","root");
+  demo.Select("root");
   return 0;
 }
